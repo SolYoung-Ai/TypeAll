@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Image } from '@/components/ui/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { SITE } from '@/config/site';
+import wechatQr from '@/assets/wechat-qr.png';
 
 export default function AboutPage() {
+  const [showQr, setShowQr] = useState(false);
   return (
     <div className="mx-auto max-w-3xl space-y-6 px-4 py-10">
       <div>
@@ -41,6 +44,42 @@ export default function AboutPage() {
           <p className="text-sm leading-relaxed text-muted-foreground">{SITE.disclaimer}</p>
         </CardContent>
       </Card>
+
+      <Card>
+        <CardContent
+          className="flex cursor-pointer items-center justify-between gap-3 p-6 transition-colors hover:bg-accent/50"
+          onClick={() => setShowQr(true)}
+        >
+          <div>
+            <div className="text-lg font-bold">广告位招租</div>
+            <p className="mt-1 text-sm text-muted-foreground">
+              位置可指定 · 长期稳定运营 · 价格超低，欢迎扫码洽谈
+            </p>
+          </div>
+          <span aria-hidden className="text-muted-foreground">→</span>
+        </CardContent>
+      </Card>
+
+      {showQr && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+          onClick={() => setShowQr(false)}
+        >
+          <div
+            className="w-full max-w-xs rounded-2xl border bg-background p-6 text-center shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image src={wechatQr} alt="扫码添加微信洽谈广告" className="mx-auto w-full max-w-[240px] rounded-xl" />
+            <p className="mt-3 text-sm text-muted-foreground">扫二维码，添加我为朋友，洽谈广告合作</p>
+            <button
+              className="mt-3 inline-flex rounded-full border px-4 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              onClick={() => setShowQr(false)}
+            >
+              关闭
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
