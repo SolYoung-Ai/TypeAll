@@ -34,6 +34,15 @@ export default function AboutPage() {
                 SolYoung
               </a>
             </div>
+            <a
+              href={SITE.personalSite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              访问我的个人网站
+              <span aria-hidden>→</span>
+            </a>
           </div>
         </CardContent>
       </Card>
