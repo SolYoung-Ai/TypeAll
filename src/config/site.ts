@@ -12,7 +12,7 @@ export const SITE = {
   ownerName: 'Solyoung',
   ownerTitle: '站点作者',
   ownerBio: '记录我的创作、实践，以及正在发生的可能。',
-  personalSite: 'https://SolYoung-work.github.io/',
+  personalSite: 'https://solyoung-ai.github.io/',
   douyinImg: `${BASE}douyin.png`,
   xiaohongshuImg: `${BASE}xiaohongshu.png`,
   footerNote: '性格测试集合站 · 作者 Solyoung',

@@ -92,6 +92,9 @@ export const Layout = () => {
           </div>
           <p className="max-w-3xl text-xs leading-relaxed">{SITE.disclaimer}</p>
           <p className="text-xs">{SITE.copyright}</p>
+          <p className="text-xs">
+            本站累计访问 <span id="busuanzi_site_pv" /> 次
+          </p>
         </div>
       </footer>
     </div>
