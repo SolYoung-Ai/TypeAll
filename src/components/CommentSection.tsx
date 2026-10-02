@@ -33,28 +33,23 @@ export default function CommentSection() {
     const host = boxRef.current;
     if (!host) return;
 
-    // 动态注入 giscus client 脚本（注册 <giscus-widget>），仅一次
-    const ensureScript = (): Promise<void> => {
-      if (document.querySelector('script[data-giscus-script]')) return Promise.resolve();
-      return new Promise((resolve) => {
-        const s = document.createElement('script');
-        s.src = 'https://giscus.app/client.js';
-        s.async = true;
-        s.setAttribute('data-giscus-script', '');
-        s.onload = () => resolve();
-        s.onerror = () => resolve();
-        document.head.appendChild(s);
-      });
-    };
+    // 先创建元素并设置属性，再插入 DOM：此刻 giscus client 脚本尚未加载，
+    // 元素是未升级的 unknown element，属性已就位。之后再加载脚本，脚本注册
+    // 自定义元素后浏览器会自动升级该元素并读取已存在的属性。
+    const el = document.createElement('giscus-widget');
+    for (const [k, v] of Object.entries(WIDGET_ATTRS)) {
+      el.setAttribute(k, v);
+    }
+    host.appendChild(el);
 
-    ensureScript().then(() => {
-      if (host.querySelector('giscus-widget')) return;
-      const el = document.createElement('giscus-widget');
-      for (const [k, v] of Object.entries(WIDGET_ATTRS)) {
-        el.setAttribute(k, v);
-      }
-      host.appendChild(el);
-    });
+    // 再注入 giscus client 脚本（注册 <giscus-widget>），仅一次
+    if (!document.querySelector('script[data-giscus-script]')) {
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.async = true;
+      s.setAttribute('data-giscus-script', '');
+      document.head.appendChild(s);
+    }
   }, []);
 
   return (
