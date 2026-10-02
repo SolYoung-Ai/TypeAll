@@ -4,8 +4,8 @@
 const BASE = (import.meta.env.MIAODA_CLIENT_BASE_PATH || '').replace(/\/$/, '') + '/';
 
 export const SITE = {
-  name: '性格测试集合站',
-  shortName: '性格测试集合站',
+  name: '快测',
+  shortName: '快测',
   tagline: '聚合全网主流性格测试的一站式平台',
   logoImg: `${BASE}logo.png`,
   ownerImg: `${BASE}solyoung.jpg`,
@@ -16,7 +16,7 @@ export const SITE = {
   douyinImg: `${BASE}douyin.png`,
   xiaohongshuImg: `${BASE}xiaohongshu.png`,
   footerNote: '性格测试集合站 · 作者 Solyoung',
-  copyright: '© 2026 性格测试集合站 · 保留所有权利',
+  copyright: '© 2026 快测 · 保留所有权利',
   disclaimer:
     '本网站所有测评仅供娱乐与自我参考，不能替代心理咨询师、精神科医生的专业评估，请勿将结果作为婚恋、招聘、升学等重大决策的唯一依据。',
   categoryMeta: {
