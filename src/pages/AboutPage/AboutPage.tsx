@@ -18,22 +18,6 @@ export default function AboutPage() {
               {SITE.ownerName} · {SITE.ownerTitle}
             </div>
             <p className="mt-1 text-sm text-muted-foreground">{SITE.ownerBio}</p>
-            <div className="mt-3 flex flex-wrap gap-3">
-              <a
-                href="#douyin"
-                className="inline-flex items-center gap-2 rounded-lg px-1.5 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <Image src={SITE.douyinImg} alt="抖音 SolYoung" className="h-5 w-5 rounded" />
-                SolYoung
-              </a>
-              <a
-                href="#xiaohongshu"
-                className="inline-flex items-center gap-2 rounded-lg px-1.5 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <Image src={SITE.xiaohongshuImg} alt="小红书 SolYoung" className="h-5 w-5 rounded" />
-                SolYoung
-              </a>
-            </div>
             <a
               href={SITE.personalSite}
               target="_blank"
