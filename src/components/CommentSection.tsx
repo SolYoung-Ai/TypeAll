@@ -1,13 +1,15 @@
-import { useEffect, createElement } from 'react';
+import { useEffect, useRef } from 'react';
 
 // giscus 评论区：基于 GitHub Discussions，支持评论 / 回复 / 点赞
 // 访客需 GitHub 登录后即可发言（giscus.app 生成的配置）
+// 用原生 DOM 创建 <giscus-widget> 并 setAttribute，避免 React 对自定义元素
+// 属性传递失效（camelCase 属性不会作为 attribute 落到元素上）导致 giscus 读不到仓库配置。
 const GISCUS_REPO = 'SolYoung-work/personality-hub';
 const GISCUS_REPO_ID = 'R_kgDOU4dm7A';
 const GISCUS_CATEGORY = 'Announcements';
 const GISCUS_CATEGORY_ID = 'DIC_kwDOU4dm7M4DG3yp';
 
-const attrs: Record<string, string> = {
+const WIDGET_ATTRS: Record<string, string> = {
   repo: GISCUS_REPO,
   repoid: GISCUS_REPO_ID,
   category: GISCUS_CATEGORY,
@@ -23,14 +25,33 @@ const attrs: Record<string, string> = {
 };
 
 export default function CommentSection() {
+  const boxRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    // 注入 giscus client 脚本（注册 <giscus-widget> 自定义元素），仅注入一次
-    if (document.querySelector('script[data-giscus-script]')) return;
-    const s = document.createElement('script');
-    s.src = 'https://giscus.app/client.js';
-    s.async = true;
-    s.setAttribute('data-giscus-script', '');
-    document.head.appendChild(s);
+    const host = boxRef.current;
+    if (!host) return;
+
+    // 注入 giscus client 脚本（注册 <giscus-widget> 自定义元素），仅一次
+    const ensureScript = (): Promise<void> => {
+      if (document.querySelector('script[data-giscus-script]')) return Promise.resolve();
+      return new Promise((resolve) => {
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.async = true;
+        s.setAttribute('data-giscus-script', '');
+        s.onload = () => resolve();
+        document.head.appendChild(s);
+      });
+    };
+
+    ensureScript().then(() => {
+      if (host.querySelector('giscus-widget')) return;
+      const el = document.createElement('giscus-widget');
+      for (const [k, v] of Object.entries(WIDGET_ATTRS)) {
+        el.setAttribute(k, v);
+      }
+      host.appendChild(el);
+    });
   }, []);
 
   return (
@@ -39,8 +60,7 @@ export default function CommentSection() {
       <p className="mt-1 text-xs text-muted-foreground">
         登录 GitHub 后即可留言、回复与点赞
       </p>
-      <div className="mt-4">{createElement('giscus-widget', attrs)}</div>
+      <div ref={boxRef} className="mt-4" />
     </section>
   );
 }
-
