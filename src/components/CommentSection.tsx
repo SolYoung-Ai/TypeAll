@@ -1,30 +1,41 @@
 import { useEffect, useRef } from 'react';
 
 // giscus 评论区：基于 GitHub Discussions，支持评论 / 回复 / 点赞
-// 访客需 GitHub 登录后即可发言（giscus.app 生成的配置）
-// 采用：giscus client 脚本已在 index.html <head> 静态加载，这里用 innerHTML
-// 插入带属性的 <giscus-widget>，让属性在自定义元素升级之前就存在，giscus
-// 才能正确读取仓库配置（直接用 createElement+setAttribute 会因元素先升级
-// 而读不到属性，iframe 里出现 repo=undefined）。
+// 访客需 GitHub 登录后即可发言。
+// 关键：giscus 的 client.js 是从「它自身的 <script> 标签的 data-* 属性」读取
+// 配置（data-repo、data-repo-id、data-theme 等），并创建一个 iframe 插入到该
+// script 标签之后。因此这里在评论区位置动态创建一个带 data-* 属性的 giscus
+// 脚本，iframe 就会渲染在评论区容器内。
+const GISCUS_DATA: Record<string, string> = {
+  repo: 'SolYoung-work/personality-hub',
+  repoId: 'R_kgDOU4dm7A',
+  category: 'Announcements',
+  categoryId: 'DIC_kwDOU4dm7M4DG3yp',
+  mapping: 'pathname',
+  strict: '0',
+  reactionsEnabled: '1',
+  emitMetadata: '0',
+  inputPosition: 'bottom',
+  theme: 'preferred_color_scheme',
+  lang: 'zh-CN',
+  loading: 'lazy',
+};
+
 export default function CommentSection() {
   const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const host = boxRef.current;
-    if (!host || host.querySelector('giscus-widget')) return;
-    host.innerHTML =
-      '<giscus-widget repo="SolYoung-work/personality-hub" ' +
-      'repoid="R_kgDOU4dm7A" ' +
-      'category="Announcements" ' +
-      'categoryid="DIC_kwDOU4dm7M4DG3yp" ' +
-      'mapping="pathname" ' +
-      'strict="0" ' +
-      'reactions-enabled="1" ' +
-      'emit-metadata="0" ' +
-      'input-position="bottom" ' +
-      'theme="preferred_color_scheme" ' +
-      'lang="zh-CN" ' +
-      'loading="lazy"></giscus-widget>';
+    if (!host || host.querySelector('script[data-giscus-script]')) return;
+
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.async = true;
+    s.setAttribute('data-giscus-script', '');
+    for (const [k, v] of Object.entries(GISCUS_DATA)) {
+      s.dataset[k] = v;
+    }
+    host.appendChild(s);
   }, []);
 
   return (
