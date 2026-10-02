@@ -1,9 +1,19 @@
-// 测试注册表：汇总全部 13 套测试
+// 测试注册表：汇总全部 25 套测试
 // EXPORTS: ALL_TESTS, getTest
 import type { ITestDef } from '@/data/types';
 import { BIGFIVE_TEST, PF16_TEST, HEXACO_TEST, EPQ_TEST, ATTACHMENT_TEST, EQ_TEST } from './tests/academic';
 import { MBTI_TEST, ENNEAGRAM_TEST, DISC_TEST, KEIRSEY_TEST, GALLUP_TEST } from './tests/popular';
 import { COLOR_TEST, ANIMAL_TEST } from './tests/fun';
+import { RIASEC_TEST, TEMPERAMENT_TEST, SES_TEST, SAS_TEST, SDS_TEST } from './tests/academic2';
+import {
+  FPA_TEST,
+  PDP_TEST,
+  BELBIN_TEST,
+  LOVE_LANGUAGE_TEST,
+  PROCRAST_TEST,
+  AQ_TEST,
+  LOT_TEST,
+} from './tests/popular2';
 
 export const ALL_TESTS: ITestDef[] = [
   BIGFIVE_TEST,
@@ -19,6 +29,18 @@ export const ALL_TESTS: ITestDef[] = [
   GALLUP_TEST,
   COLOR_TEST,
   ANIMAL_TEST,
+  RIASEC_TEST,
+  TEMPERAMENT_TEST,
+  SES_TEST,
+  SAS_TEST,
+  SDS_TEST,
+  FPA_TEST,
+  PDP_TEST,
+  BELBIN_TEST,
+  LOVE_LANGUAGE_TEST,
+  PROCRAST_TEST,
+  AQ_TEST,
+  LOT_TEST,
 ];
 
 export function getTest(id: string): ITestDef | undefined {
