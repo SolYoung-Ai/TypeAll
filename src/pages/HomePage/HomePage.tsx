@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import TestCard from '@/components/TestCard';
+import { Image } from '@/components/ui/image';
 import { ALL_TESTS } from '@/data/registry';
 import { SITE } from '@/config/site';
 import { Button } from '@/components/ui/button';
@@ -18,6 +19,16 @@ export default function HomePage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
+        <a
+          href={SITE.personalSite}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-1.5 text-sm text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          <Image src={SITE.ownerImg} alt={SITE.ownerName} className="h-6 w-6 rounded-full object-cover" />
+          防伪 · 作者个人网站
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </section>
 
       <section className="mt-6">
