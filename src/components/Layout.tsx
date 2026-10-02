@@ -79,20 +79,19 @@ export const Layout = () => {
             <Link to="/about" className="inline-flex">
               <BrandLogo compact />
             </Link>
-            <span className="text-xs">{SITE.footerNote}</span>
+            <a
+              href={SITE.personalSite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs transition-colors hover:text-foreground"
+            >
+              <Image src={SITE.ownerImg} alt={SITE.ownerName} className="h-5 w-5 rounded-full object-cover" />
+              作者个人网站
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
           </div>
           <p className="max-w-3xl text-xs leading-relaxed">{SITE.disclaimer}</p>
           <p className="text-xs">{SITE.copyright}</p>
-          <a
-            href={SITE.personalSite}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs transition-colors hover:text-foreground"
-          >
-            <Image src={SITE.ownerImg} alt={SITE.ownerName} className="h-5 w-5 rounded-full object-cover" />
-            作者个人网站
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
         </div>
       </footer>
     </div>
