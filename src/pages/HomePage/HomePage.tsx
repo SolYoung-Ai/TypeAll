@@ -23,10 +23,10 @@ export default function HomePage() {
           href={SITE.personalSite}
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-1.5 text-sm text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          className="mx-auto mt-6 flex w-fit items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-1.5 text-sm text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
         >
           <Image src={SITE.ownerImg} alt={SITE.ownerName} className="h-6 w-6 rounded-full object-cover" />
-          防伪 · 作者个人网站
+          作者个人网站
           <ArrowRight className="h-4 w-4" />
         </a>
       </section>
