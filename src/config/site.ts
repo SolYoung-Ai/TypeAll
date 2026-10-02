@@ -6,7 +6,7 @@ const BASE = (import.meta.env.MIAODA_CLIENT_BASE_PATH || '').replace(/\/$/, '') 
 export const SITE = {
   name: '性格测试集合站',
   shortName: '性格测试集合站',
-  tagline: '聚合 13 套主流人格测评的一站式平台',
+  tagline: '聚合全网主流性格测试的一站式平台',
   logoImg: `${BASE}logo.png`,
   ownerImg: `${BASE}solyoung.jpg`,
   ownerName: 'Solyoung',

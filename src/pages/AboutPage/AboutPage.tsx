@@ -42,7 +42,7 @@ export default function AboutPage() {
         <CardContent className="space-y-3 p-6">
           <h2 className="font-semibold">关于本站</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            本站聚合 13 套主流人格与性格测试，分为学术量表、流行测评与趣味娱乐三类。本站由 AI 辅助搭建，作者没有编程经验，界面力求简洁易用，结果报告逐维度给出解读与相处建议。
+            本站聚合 25 套全网主流性格测试，分为学术量表、流行测评与趣味娱乐三类。本站由 AI 辅助搭建，作者没有编程经验，界面力求简洁易用，结果报告逐维度给出解读与相处建议。
           </p>
           <h2 className="pt-2 font-semibold">免责声明</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">{SITE.disclaimer}</p>
