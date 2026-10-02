@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
 import { saveAttempt } from '@/lib/history';
-import CommentSection from '@/components/CommentSection';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import type { IOption } from '@/data/types';
 import { cn } from '@/lib/utils';
@@ -112,8 +111,6 @@ export default function TestPage() {
           </Button>
         )}
       </div>
-
-      <CommentSection />
     </div>
   );
 }
